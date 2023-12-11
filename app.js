@@ -1,12 +1,16 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
 app.set("port", process.env.PORT || 3000)
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 const { Pool } = require('pg');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
     res.render('index')
@@ -20,6 +24,7 @@ const pool = new Pool({
     port: 5432, // Default PostgreSQL port
   });
 
+//use these variables for page redirection
 let authenticatedCo = false;
 let authenticadedStud = false;
 
@@ -111,6 +116,8 @@ app.get('/coLogin', async (req, res) => {
     }
   });
   
+
+  app.post('/studReg')
   
   // Close the pool when the application is shutting down
   process.on('SIGINT', () => {
