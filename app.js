@@ -42,3 +42,16 @@ app.get('/companyview2', (req, res) => {
 app.listen(app.get("port"), () => {
     console.log(`Server started on port ${app.get("port")}`);
 });
+
+// Knex database connection
+const knex = require("knex")({
+    client: "pg",
+    connection: {
+        host: process.env.RDS_HOSTNAME || "localhost",
+        user: process.env.RDS_USERNAME || "postgres",
+        password: process.env.RDS_PASSWORD || "password",
+        database: process.env.RDS_DB_NAME || "WebDevDB",
+        port: process.env.RDS_PORT || 5432,
+        ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false
+    }
+});
