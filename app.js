@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.envPORT || 3000)
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -26,7 +26,3 @@ app.get('/studentreg', (req, res) => {
 app.get('/companyreg', (req, res) => {
     res.render('companyreg')
 })
-
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});

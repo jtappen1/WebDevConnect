@@ -11109,44 +11109,47 @@ footer.footer .social-link:hover {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
-.registration-form {
-  margin-top: 15%;
+#loginContent {
+  margin-top: 10%;
+  text-align: center;
+}
+
+#loginContent > div {
   max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
 }
 
-.registration-form h1 {
+#loginContent h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.registration-form label {
+#loginContent label {
   display: block;
   margin-bottom: 5px;
 }
 
-.registration-form input,
-.registration-form textarea {
+#loginContent input,
+#loginContent textarea {
   width: 100%;
-  padding: 10px; /* Adjusted padding for better aesthetics */
-  margin-bottom: 15px; /* Adjusted margin for better spacing */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  border: 1px solid #ddd; /* Added a border for input fields and text areas */
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
   border-radius: 3px;
 }
 
-.registration-form #button {
+#loginContent #button {
   text-align: center;
 }
 
-.registration-form .button-23 {
+#loginContent .button-23 {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: var(--bs-yellow);
   color: #fff;
   border: none;
   border-radius: 3px;
