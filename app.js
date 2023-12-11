@@ -26,3 +26,7 @@ app.get('/studentreg', (req, res) => {
 app.get('/companyreg', (req, res) => {
     res.render('companyreg')
 })
+
+app.listen(app.get("port"), () => {
+    console.log(`Server started on port ${app.get("port")}`);
+});
