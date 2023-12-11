@@ -27,6 +27,18 @@ app.get('/companyreg', (req, res) => {
     res.render('companyreg')
 })
 
+app.get('/studview', (req, res) => {
+    res.render('studview')
+})
+
+app.get('/companyview1', (req, res) => {
+    res.render('companyview1')
+})
+
+app.get('/companyview2', (req, res) => {
+    res.render('companyview2')
+})
+
 app.listen(app.get("port"), () => {
     console.log(`Server started on port ${app.get("port")}`);
 });

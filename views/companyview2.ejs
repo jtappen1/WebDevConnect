@@ -9,7 +9,7 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://useå.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Simple line icons-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" rel="stylesheet" />
         <!-- Google fonts-->
@@ -24,10 +24,8 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="/">WebDevConnect</a></li>
                 <li class="sidebar-nav-item"><a href="/">Home</a></li>
-                <li class="sidebar-nav-item"><a href="studentlogin">Student Login</a></li>
-                <li class="sidebar-nav-item"><a href="companylogin">Company Login</a></li>
-                <li class="sidebar-nav-item"><a href="studentreg">Student Registration</a></li>
-                <li class="sidebar-nav-item"><a href="companyreg">Company Registration</a></li>
+                <li class="sidebar-nav-item"><form action="/logout" method="POST"><a href="#" onclick="document.forms[0].submit();">Logout</a></form></li>
+                <li class="sidebar-nav-item"><a href="companyview1">Available Students</a></li>
             </ul>
         </nav>
         <!--Page Header-->
@@ -35,40 +33,14 @@
             <div class="container px-4 px-lg-5">
                 <div class="content-section-heading">
                     <h3 class="text-secondary mb-0">Welcome</h3>
-                    <h2 class="mb-5">Company|Organization Registration</h2>
+                    <h2 class="mb-5">Listed Work</h2>
                 </div>
             </div>
         </section>
 
-        <div id="loginContent" style="margin-top:10%; text-align:center; ">
-            <div>
-                <h1 style="text-align:center;">Register</h1>
-                <form action="/coReg" method="POST">
-                    <label for="fNmane">Company Name:</label>
-                    <input type="text" id="fName" name="fName">
-                    <br>
-                    <br>
-                    <label for="desc">Brief Description of Company:</label><br>
-                    <textarea rows="5" cols="40" id="desc" name="desc"></textarea>
-                    <br>
-                    <br>
-                    <label for="github">Phone Number:</label>
-                    <input type="text" id="github" name="github">
-                    <br>
-                    <br>
-                    <label for="email">Email:</label>
-                    <input type="text" id="email" name="email">
-                    <br>
-                    <br>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password">
-                    <br>
-                    <div id="button">
-                        <button type="submit" class="button-23">Register</a>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <p>We will write a query that will iterate throught the "work" or "jobs table or whatever and display 
+            the info here for every listing that corresponds to the company number
+        </p>
 
 
 
