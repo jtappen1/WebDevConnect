@@ -13,11 +13,11 @@ app.get('/', (req, res) => {
 })
 
 const pool = new Pool({
-    user: 'your_user',
-    host: 'your_host',
-    database: 'your_database',
-    password: 'your_password',
-    port: 5432, // Default PostgreSQL port
+    user: process.env.DB_USERNAME || 'ebroot',
+    host: process.env.DB_HOST || 'postgres',
+    database: process.env.DB_NAME || 'ebdb',
+    password: process.env.DB_PASSWORD || 'ChickenJoe03',
+    port: process.env.RDS_PORT || 5432,
   });
 
 let authenticatedCo = false;
@@ -171,10 +171,10 @@ app.listen(app.get("port"), () => {
 const knex = require("knex")({
     client: "pg",
     connection: {
-        host: process.env.RDS_HOSTNAME || "localhost",
-        user: process.env.RDS_USERNAME || "postgres",
-        password: process.env.RDS_PASSWORD || "password",
-        database: process.env.RDS_DB_NAME || "WebDevDB",
+        host: process.env.RDS_HOSTNAME || "postgres",
+        user: process.env.RDS_USERNAME || "ebroot",
+        password: process.env.RDS_PASSWORD || "ChickenJoe03!",
+        database: process.env.RDS_DB_NAME || "ebdb",
         port: process.env.RDS_PORT || 5432,
         ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false
     }
