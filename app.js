@@ -29,19 +29,6 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 
-// Knex database connection
-const knex = require("knex")({
-    client: "pg",
-    connection: {
-        host: process.env.RDS_HOSTNAME || "localhost",
-        user: process.env.RDS_USERNAME || "postgres",
-        password: process.env.RDS_PASSWORD || "password",
-        database: process.env.RDS_DB_NAME || "NormalizationTest",
-        port: process.env.RDS_PORT || 5432,
-        ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false
-    }
-});
-
 const pool = new Pool({
     user: 'your_user',
     host: 'your_host',
