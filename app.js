@@ -136,7 +136,7 @@ app.get('/coLogin', async (req, res) => {
         };
 
         // then she inserts the survey into the database
-        const insertedStud = await knex("Student").insert(studData).returning("*");
+        const insertedStud = await knex("Students").insert(studData).returning("*");
 
         // Log the inserted survey data to make sure that it is right
         console.log("DB updated successfully:", insertedStud);
@@ -227,7 +227,7 @@ app.get('/studview', (req, res) => {
 // route to company view
 app.get('/companyview1', (req, res) => {
     if (authenticatedCo == true) {
-        select('*').from('Student').then(Student => {
+        select('*').from('Students').then(Student => {
             console.log("I work", Student);
             res.render("companyview1", { students: Student });
         });
