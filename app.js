@@ -194,7 +194,7 @@ app.post('/studentreg', (req, res) => {
 
 
 //route to company registration page
-app.get('/companyreg', (req, res) => {
+app.post('/companyreg', (req, res) => {
     if (authenticatedCo == false && authenticatedStud == false){
         res.render('companyreg')
     } else if (authenticatedCo == false && authenticatedStud == true){
