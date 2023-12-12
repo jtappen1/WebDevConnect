@@ -215,6 +215,20 @@ app.get('/companyreg', (req, res) => {
 //route to student view
 app.get('/studview', (req, res) => {
     if (authenticadedStud == true){
+        knex('Jobs')
+        .select('*')
+        .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
+        .where('Jobs.Completed', false)
+        .then(result => {
+            console.log(result);
+            res.render("/studview", { jobs: result });
+
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+
         res.render('studview')
     } else {res.redirect('studentlogin')}
 })

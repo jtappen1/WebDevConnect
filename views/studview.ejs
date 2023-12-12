@@ -37,9 +37,19 @@
             </div>
         </section>
 
-        <p>We will write a query that will iterate throught the entirety of the "Jobs" table or whatever it's called. If completed 
-            is false then they will display here
-        </p>
+        <h1>Projects that are ready for you to get started!</h1><br>
+        <br>
+        <% for (let iCount = 0; iCount < jobs.length; iCount++) { %>
+            <fieldset><h2><%= jobs[iCount].JobName %></h2>
+                <ul>
+                    <li><p>Company Name:</p><%= jobs[iCount].CompanyName %></li>
+                    <li><p>Job Description:</p><%= jobs[iCount].JobDescription %></li>
+                    <li><p>Deadline:</p><%= jobs[iCount].Deadline %></li>
+                    <li><p>Company Phone:</p><%= jobs[iCount].CompPhone %></li>
+                    <li><p>Company Email:</p><%= jobs[iCount].CompEmail %></li>
+                </ul>
+            </fieldset>
+        <% } %>
 
 
 
