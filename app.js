@@ -182,7 +182,7 @@ app.get('/coLogin', async (req, res) => {
 
 
   //route to student registration page
-app.post('/studentreg', (req, res) => {
+app.get('/studentreg', (req, res) => {
     if (authenticatedCo == false && authenticatedStud == false){
         res.render('studentreg')
     } else if (authenticatedCo == false && authenticatedStud == true){
@@ -194,7 +194,7 @@ app.post('/studentreg', (req, res) => {
 
 
 //route to company registration page
-app.post('/companyreg', (req, res) => {
+app.get('/companyreg', (req, res) => {
     if (authenticatedCo == false && authenticatedStud == false){
         res.render('companyreg')
     } else if (authenticatedCo == false && authenticatedStud == true){
