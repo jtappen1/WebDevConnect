@@ -17,7 +17,7 @@ const knex = require("knex")({
     client: "pg",
     connection: {
         host: process.env.RDS_HOSTNAME || "localhost",
-        user: process.env.RDS_USERNAME || "postgres",
+        user: process.env.RDS_USERNAME || "ebroot",
         password: process.env.RDS_PASSWORD || "ChickenJoe03!",
         database: process.env.RDS_DB_NAME || "ebdb",
         port: process.env.RDS_PORT || 5432,
