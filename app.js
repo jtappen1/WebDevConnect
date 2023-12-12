@@ -95,7 +95,7 @@ app.get('/coLogin', async (req, res) => {
   
     try {
       // Query the database for a user with the provided email
-      const company = await knex('Students').where('email', coEmail).select('*').first();
+      const company = await knex('Companies').where('email', coEmail).select('*').first();
   
       // Check if a user with the provided email was found
       if (company) {
@@ -206,7 +206,7 @@ app.get('/companyreg', (req, res) => {
 
 //route to student view
 app.get('/studview', (req, res) => {
-    if (authenticadedStud == true) {
+    if (authenticatedStud == true) {
         knex('Jobs')
             .select('*')
             .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
@@ -226,7 +226,7 @@ app.get('/studview', (req, res) => {
 
 // route to company view
 app.get('/companyview1', (req, res) => {
-    if (authenticadedCo == true) {
+    if (authenticatedCo == true) {
         select('*').from('Student').then(Student => {
             console.log("I work", Student);
             res.render("companyview1", { students: Student });
@@ -238,7 +238,7 @@ app.get('/companyview1', (req, res) => {
 
 // route to company view 2 (work listed)
 app.get('/companyview2', (req, res) => {
-    if (authenticadedCo == true){
+    if (authenticatedCo == true){
         res.render('companyview2')
     } else {res.redirect('companylogin')}
 })
