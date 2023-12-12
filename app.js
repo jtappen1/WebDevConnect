@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
-const { Pool } = require('pg');
 app.set("port", process.env.PORT || 3000)
 
 app.set("views", path.join(__dirname, "views"));
@@ -175,11 +174,11 @@ app.get('/coLogin', async (req, res) => {
     }
   })
   
-  // Close the pool when the application is shutting down
+  // Close the knex when the application is shutting down
   process.on('SIGINT', () => {
-    pool.end();
+    knex.destroy();
     process.exit();
-  });
+});
 
 
   //route to student registration page
