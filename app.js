@@ -124,19 +124,19 @@ app.get('/coLogin', async (req, res) => {
   app.post('/studReg', async (req, res) => {
     try {
         const studData = {
-            studFirst: req.body.fName,
-            studLast: req.body.lName,
-            linkedIn: req.body.linkedin,
-            github: req.body.github,
-            description: req.body.desc,
-            school: req.body.school,
-            phoneNum: req.body.phone,
-            emaill: req.body.email,
-            password: req.body.password
+            StudFirstName: req.body.fName,
+            StudLastName: req.body.lName,
+            Linkedin: req.body.linkedin,
+            Github: req.body.github,
+            StudDescription: req.body.desc,
+            StudSchool: req.body.school,
+            StudPhone: req.body.phone,
+            StudEmail: req.body.email,
+            StudPassword: req.body.password
         };
 
         // then she inserts the survey into the database
-        const insertedStud = await knex("Student").insert(studData).returning("*");
+        const insertedStud = await knex("Students").insert(studData).returning("*");
 
         // Log the inserted survey data to make sure that it is right
         console.log("DB updated successfully:", insertedStud);
@@ -153,15 +153,15 @@ app.get('/coLogin', async (req, res) => {
   app.post('/coReg', async (req, res) => {
     try {
         const coData = {
-            coName: req.body.coName,
-            desc: req.body.desc,
-            phone: req.body.phone,
-            email: req.body.email,
-            password: req.body.password
+            CompName: req.body.coName,
+            CompDescription: req.body.desc,
+            CompPhone: req.body.phone,
+            CompEmail: req.body.email,
+            Password: req.body.password
         };
 
         // then she inserts the survey into the database
-        const insertedCo = await knex("Company").insert(coData).returning("*");
+        const insertedCo = await knex("Companies").insert(coData).returning("*");
 
         // Log the inserted survey data to make sure that it is right
         console.log("DB updated successfully:", insertedCo);
@@ -227,7 +227,7 @@ app.get('/studview', (req, res) => {
 // route to company view
 app.get('/companyview1', (req, res) => {
     if (authenticatedCo == true) {
-        select('*').from('Student').then(Student => {
+        select('*').from('Students').then(Student => {
             console.log("I work", Student);
             res.render("companyview1", { students: Student });
         });
