@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const { Pool } = require('pg');
 app.set("port", process.env.PORT || 3000)
 
 app.set("views", path.join(__dirname, "views"));
