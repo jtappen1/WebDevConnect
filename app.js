@@ -65,26 +65,26 @@ app.get('/companylogin', (req, res) => {
 
 //when login is attempted by user
 app.get('/studlogin', async (req, res) => {
-    const userEmail = req.query.email; // Assuming email is sent as a query parameter
-    const userPassword = req.query.password; // Assuming password is sent as a query parameter
+    const studEmail = req.body.email;
+    const studPassword = req.body.password;
   
     try {
       // Query the database for a user with the provided email
-      const query = 'SELECT * FROM Students WHERE email = $1';
-      const { rows } = await pool.query(query, [userEmail]);
+      // Query the database for a user with the provided email
+        const user = await knex('Students').where('email', studEmail).select('*').first();
   
       // Check if a user with the provided email was found
-      if (rows.length > 0) {
-        const storedPassword = rows[0].Password;
+        if (user) {
+            const storedPassword = user.Password;
   
         // Check if the provided password matches the stored password
-        if (userPassword === storedPassword) {
-          // Passwords match, user is authenticated
-          authenticatedStud = true;
-          res.render('studview');
+        if (studPassword === storedPassword) {
+            // Passwords match, user is authenticated
+            authenticatedStud = true;
+            res.render('studview');
         } else {
-          // Passwords do not match
-          res.status(401).send('Unauthorized');
+            // Passwords do not match
+            res.status(401).send('Unauthorized');
         }
       } else {
         // No user with the provided email found
@@ -98,17 +98,16 @@ app.get('/studlogin', async (req, res) => {
 
   //when login is attempted by company
 app.get('/coLogin', async (req, res) => {
-    const coEmail = req.query.email; // Assuming email is sent as a query parameter
-    const coPassword = req.query.password; // Assuming password is sent as a query parameter
+    const coEmail = req.body.email;
+    const coPassword = req.body.password;
   
     try {
       // Query the database for a user with the provided email
-      const query = 'SELECT * FROM Company WHERE email = $1';
-      const { rows } = await pool.query(query, [coEmail]);
+      const company = await knex('Students').where('email', coEmail).select('*').first();
   
       // Check if a user with the provided email was found
-      if (rows.length > 0) {
-        const storedPassword = rows[0].Password;
+      if (company) {
+        const storedPassword = company.Password;
   
         // Check if the provided password matches the stored password
         if (coPassword === storedPassword) {
@@ -121,7 +120,7 @@ app.get('/coLogin', async (req, res) => {
         }
       } else {
         // No user with the provided email found
-        res.status(404).send('User not found');
+        res.status(404).send('Company not found');
       }
     } catch (error) {
       console.error(error);
