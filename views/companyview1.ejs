@@ -38,9 +38,20 @@
             </div>
         </section>
 
-        <p>We will write a query that will iterate throught the entirety of the "Student" table and display their credentials here
-        </p>
-
+        <h1>Students that are available to build projects for your needs!</h1><br>
+        <br>
+        <% for (let iCount = 0; iCount < students.length; iCount++) { %>
+            <fieldset><h2><%= students[iCount].LastName %>, <%= students[iCount].FirstName %></h2>
+                <ul>
+                    <li><p>School name:</p><%= students[iCount].school %></li>
+                    <li><p>Linkedin Profile:</p><%= students[iCount].linkedin %></li>
+                    <li><p>Github Repository:</p><%= students[iCount].github %></li>
+                    <li><p>Description of Skills:</p><%= students[iCount].description %></li>
+                    <li><p>Phone #:</p><%= students[iCount].phone %></li>
+                    <li><p>Email:</p><%= students[iCount].email %></li>
+                </ul>
+            </fieldset>
+        <% } %>
 
 
 

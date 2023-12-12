@@ -221,10 +221,15 @@ app.get('/studview', (req, res) => {
 
 // route to company view
 app.get('/companyview1', (req, res) => {
-    if (authenticadedCo == true){
-        res.render('companyview1')
-    } else {res.redirect('companylogin')}
-})
+    if (authenticadedCo == true) {
+        select('*').from('Student').then(Student => {
+            console.log("I work", Student);
+            res.render("companyview1", { students: Student });
+        });
+    } else {
+        res.redirect('companylogin');
+    }
+});
 
 // route to company view 2 (work listed)
 app.get('/companyview2', (req, res) => {
