@@ -12,21 +12,27 @@ const { Pool } = require('pg');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Knex database connection
+const knex = require("knex")({
+    client: "pg",
+    connection: {
+        host: process.env.RDS_HOSTNAME || "localhost",
+        user: process.env.RDS_USERNAME || "postgres",
+        password: process.env.RDS_PASSWORD || "password",
+        database: process.env.RDS_DB_NAME || "NormalizationTest",
+        port: process.env.RDS_PORT || 5432,
+        ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false
+    }
+});
+
 app.get('/', (req, res) => {
     res.render('index')
 })
 
-const pool = new Pool({
-    user: 'your_user',
-    host: 'your_host',
-    database: 'your_database',
-    password: 'your_password',
-    port: 5432, // Default PostgreSQL port
-  });
 
 //use these variables for page redirection
 let authenticatedCo = false;
-let authenticadedStud = false;
+let authenticatedStud = false;
 
 //Route to student Login page
 app.get('/studentlogin', (req, res) => {
@@ -67,7 +73,7 @@ app.get('/studlogin', async (req, res) => {
         // Check if the provided password matches the stored password
         if (userPassword === storedPassword) {
           // Passwords match, user is authenticated
-          authenticadedStud = true;
+          authenticatedStud = true;
           res.render('studview');
         } else {
           // Passwords do not match
@@ -100,7 +106,7 @@ app.get('/coLogin', async (req, res) => {
         // Check if the provided password matches the stored password
         if (coPassword === storedPassword) {
           // Passwords match, user is authenticated
-          authenticadedCo = true;
+          authenticatedCo = true;
           res.render('companyview1');
         } else {
           // Passwords do not match
@@ -116,8 +122,59 @@ app.get('/coLogin', async (req, res) => {
     }
   });
   
+// student registration
+  app.post('/studReg', async (req, res) => {
+    try {
+        const studData = {
+            studFirst: req.body.fName,
+            studLast: req.body.lName,
+            linkedIn: req.body.linkedin,
+            github: req.body.github,
+            description: req.body.desc,
+            school: req.body.school,
+            phoneNum: req.body.phone,
+            emaill: req.body.email,
+            password: req.body.password
+        };
 
-  app.post('/studReg')
+        // then she inserts the survey into the database
+        const insertedStud = await knex("Student").insert(studData).returning("*");
+
+        // Log the inserted survey data to make sure that it is right
+        console.log("DB updated successfully:", insertedStud);
+        res.redirect('studentlogin')
+
+
+    } catch (error) {
+        console.error("Error submitting form:", error);
+        res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+  })
+
+  // company registration
+  app.post('/coReg', async (req, res) => {
+    try {
+        const coData = {
+            coName: req.body.coName,
+            desc: req.body.desc,
+            phone: req.body.phone,
+            email: req.body.email,
+            password: req.body.password
+        };
+
+        // then she inserts the survey into the database
+        const insertedCo = await knex("Company").insert(coData).returning("*");
+
+        // Log the inserted survey data to make sure that it is right
+        console.log("DB updated successfully:", insertedCo);
+
+        res.redirect('companylogin')
+
+    } catch (error) {
+        console.error("Error submitting form:", error);
+        res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+  })
   
   // Close the pool when the application is shutting down
   process.on('SIGINT', () => {
@@ -153,21 +210,21 @@ app.get('/companyreg', (req, res) => {
 app.get('/studview', (req, res) => {
     if (authenticadedStud == true){
         res.render('studview')
-    } else (res.redirect('studentlogin'))
+    } else {res.redirect('studentlogin')}
 })
 
 // route to company view
 app.get('/companyview1', (req, res) => {
     if (authenticadedCo == true){
         res.render('companyview1')
-    } else (res.redirect('companylogin'))
+    } else {res.redirect('companylogin')}
 })
 
 // route to company view 2 (work listed)
 app.get('/companyview2', (req, res) => {
     if (authenticadedCo == true){
         res.render('companyview2')
-    } else (res.redirect('companylogin'))
+    } else {res.redirect('companylogin')}
 })
 
 app.listen(app.get("port"), () => {
