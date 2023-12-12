@@ -29,14 +29,6 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 
-const pool = new Pool({
-    user: 'your_user',
-    host: 'your_host',
-    database: 'your_database',
-    password: 'your_password',
-    port: 5432, // Default PostgreSQL port
-  });
-
 //use these variables for page redirection
 let authenticatedCo = false;
 let authenticatedStud = false;
