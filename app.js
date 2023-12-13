@@ -76,7 +76,7 @@ app.get('/studlogin', async (req, res) => {
         if (studPassword === storedPassword) {
             // Passwords match, user is authenticated
             authenticatedStud = true;
-            res.render('studview');
+            res.redirect('studview');
         } else {
             // Passwords do not match
             res.status(401).send('Unauthorized');
@@ -210,9 +210,9 @@ app.get('/companyreg', (req, res) => {
 })
 
 //route to student view
-app.get('/studview', (req, res) => {
+app.get('/studview', async (req, res) => {
     if (authenticatedStud == true) {
-        knex.select('*').from('Jobs').innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
+        await knex.select('*').from('Jobs').innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
         .where('Jobs.Completed', false).then(jobs => {
             res.render("companyview1", { jobs: jobs });
             })
