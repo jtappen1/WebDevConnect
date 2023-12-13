@@ -238,16 +238,19 @@ app.get('/companyview1', async (req, res) => {
 });
 
 // route to company view 2 (work listed)
-app.get('/companyview2', (req, res) => {
+app.get('/companyview2', async(req, res) => {
     if (authenticatedCo == true) {
-        console.log(loggedCompanyIdentifier);
-        knex.select('*').from('Jobs').where('CompanyId', loggedCompanyIdentifier).then(Jobs => {
-            console.log("I work", Jobs);
-            res.render("companyview1", { jobs: Jobs });
-    }) 
-    }else{
-        res.redirect('companylogin')}
-})
+        await knex.select('*').from('Jobs').innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
+        .where('Jobs.CompanyID', loggedCompanyIdentifier).then(jobs => {
+            res.render("companyview2", { jobs: jobs });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    } else {
+        res.redirect('studentlogin');
+    }
+});
 
 app.listen(app.get("port"), () => {
     console.log(`Server started on port ${app.get("port")}`);
