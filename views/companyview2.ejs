@@ -38,9 +38,53 @@
             </div>
         </section>
 
-        <p>We will write a query that will iterate throught the "work" or "jobs table or whatever and display 
-            the info here for every listing that corresponds to the company number
-        </p>
+        <h1>Projects listings from your company!</h1><br>
+        <br>
+        <button type="button" onclick="addJobForm()" class="button-23">Add a Listing</button>
+        <br>
+        <br>
+        <% for (let iCount = 0; iCount < jobs.length; iCount++) { %>
+            <fieldset id="compDisplay"><h2><%= jobs[iCount].JobName %></h2>
+                <ul>
+                    <li><p>Job Description:</p><%= jobs[iCount].JobDescription %></li>
+                    <li><p>Deadline:</p><%= jobs[iCount].Deadline %></li>
+                    <li><p>Completed:</p><%= jobs[iCount].Completed %></li>
+
+                </ul>
+            </fieldset>
+        <% } %>
+        <br>
+        <br>
+        <div id="loginContent" style="margin-top:10%; text-align:center; display:none;">
+            <div>
+                <h1 style="text-align:center;">Post a Listing</h1>
+                <form action="/postListing" method="POST">
+                    <label for="JobName" style="text-align:left;">Job Name:</label>
+                    <input type="text" id="JobName" name="JobName" autofocus>
+                    <br>
+                    <br>
+                    <input type="hidden" id="CompanyID" name="CompanyID" value="<%= loggedCompanyIdentifier %>">
+                    <br>
+                    <br>
+                    <label for="JobDescription" style="text-align:left;">Job Desctiption:</label>
+                    <textarea id="JobDescription" name="JobDescription"></textarea>
+                    <br>
+                    <br>
+                    <label for="Deadline">Deadline: </label>
+                    <input type="date" id="Deadline" name="Deadline">
+                    <br>
+                    <br>
+                    <input type="hidden" id="Completed" name="Completed" value="false">
+                    <br>
+                    <br>
+                    <div id="button">
+                        <button type="submit" class="button-23">Post Listing</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <br>
 
 
 
@@ -71,80 +115,85 @@
         <script src="/js/scripts.js"></script>
     </body>
     <script>
-        window.addEventListener('DOMContentLoaded', event => {
+    function addJobForm(){
+        document.getElementById("loginContent").style.display = "block"; // Change from hidden to style.display
+    }
 
-const sidebarWrapper = document.getElementById('sidebar-wrapper');
-let scrollToTopVisible = false;
-// Closes the sidebar menu
-const menuToggle = document.body.querySelector('.menu-toggle');
-menuToggle.addEventListener('click', event => {
-    event.preventDefault();
-    sidebarWrapper.classList.toggle('active');
-    _toggleMenuIcon();
-    menuToggle.classList.toggle('active');
-})
 
-// Closes responsive menu when a scroll trigger link is clicked
-var scrollTriggerList = [].slice.call(document.querySelectorAll('#sidebar-wrapper .js-scroll-trigger'));
-scrollTriggerList.map(scrollTrigger => {
-    scrollTrigger.addEventListener('click', () => {
-        sidebarWrapper.classList.remove('active');
-        menuToggle.classList.remove('active');
-        _toggleMenuIcon();
+    window.addEventListener('DOMContentLoaded', event => {
+
+        const sidebarWrapper = document.getElementById('sidebar-wrapper');
+        let scrollToTopVisible = false;
+        // Closes the sidebar menu
+        const menuToggle = document.body.querySelector('.menu-toggle');
+        menuToggle.addEventListener('click', event => {
+            event.preventDefault();
+            sidebarWrapper.classList.toggle('active');
+            _toggleMenuIcon();
+            menuToggle.classList.toggle('active');
     })
-});
 
-function _toggleMenuIcon() {
-    const menuToggleBars = document.body.querySelector('.menu-toggle > .fa-bars');
-    const menuToggleTimes = document.body.querySelector('.menu-toggle > .fa-xmark');
-    if (menuToggleBars) {
-        menuToggleBars.classList.remove('fa-bars');
-        menuToggleBars.classList.add('fa-xmark');
-    }
-    if (menuToggleTimes) {
-        menuToggleTimes.classList.remove('fa-xmark');
-        menuToggleTimes.classList.add('fa-bars');
-    }
-}
+    // Closes responsive menu when a scroll trigger link is clicked
+    var scrollTriggerList = [].slice.call(document.querySelectorAll('#sidebar-wrapper .js-scroll-trigger'));
+    scrollTriggerList.map(scrollTrigger => {
+        scrollTrigger.addEventListener('click', () => {
+            sidebarWrapper.classList.remove('active');
+            menuToggle.classList.remove('active');
+            _toggleMenuIcon();
+        })
+    });
 
-// Scroll to top button appear
-document.addEventListener('scroll', () => {
-    const scrollToTop = document.body.querySelector('.scroll-to-top');
-    if (document.documentElement.scrollTop > 100) {
-        if (!scrollToTopVisible) {
-            fadeIn(scrollToTop);
-            scrollToTopVisible = true;
+    function _toggleMenuIcon() {
+        const menuToggleBars = document.body.querySelector('.menu-toggle > .fa-bars');
+        const menuToggleTimes = document.body.querySelector('.menu-toggle > .fa-xmark');
+        if (menuToggleBars) {
+            menuToggleBars.classList.remove('fa-bars');
+            menuToggleBars.classList.add('fa-xmark');
         }
-    } else {
-        if (scrollToTopVisible) {
-            fadeOut(scrollToTop);
-            scrollToTopVisible = false;
+        if (menuToggleTimes) {
+            menuToggleTimes.classList.remove('fa-xmark');
+            menuToggleTimes.classList.add('fa-bars');
         }
     }
-})
-})
 
-function fadeOut(el) {
-el.style.opacity = 1;
-(function fade() {
-    if ((el.style.opacity -= .1) < 0) {
-        el.style.display = "none";
-    } else {
-        requestAnimationFrame(fade);
-    }
-})();
-};
+    // Scroll to top button appear
+    document.addEventListener('scroll', () => {
+        const scrollToTop = document.body.querySelector('.scroll-to-top');
+        if (document.documentElement.scrollTop > 100) {
+            if (!scrollToTopVisible) {
+                fadeIn(scrollToTop);
+                scrollToTopVisible = true;
+            }
+        } else {
+            if (scrollToTopVisible) {
+                fadeOut(scrollToTop);
+                scrollToTopVisible = false;
+            }
+        }
+    })
+    })
 
-function fadeIn(el, display) {
-el.style.opacity = 0;
-el.style.display = display || "block";
-(function fade() {
-    var val = parseFloat(el.style.opacity);
-    if (!((val += .1) > 1)) {
-        el.style.opacity = val;
-        requestAnimationFrame(fade);
-    }
-})();
-};
+    function fadeOut(el) {
+    el.style.opacity = 1;
+    (function fade() {
+        if ((el.style.opacity -= .1) < 0) {
+            el.style.display = "none";
+        } else {
+            requestAnimationFrame(fade);
+        }
+    })();
+    };
+
+    function fadeIn(el, display) {
+    el.style.opacity = 0;
+    el.style.display = display || "block";
+    (function fade() {
+        var val = parseFloat(el.style.opacity);
+        if (!((val += .1) > 1)) {
+            el.style.opacity = val;
+            requestAnimationFrame(fade);
+        }
+    })();
+    };
     </script>
 </html>

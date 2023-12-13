@@ -87,7 +87,8 @@ app.get('/studlogin', async (req, res) => {
     }
   });
 
-  //when login is attempted by company
+//when login is attempted by company
+let loggedCompanyIdentifier;
 app.get('/coLogin', async (req, res) => {
     const coEmail = req.body.email;
     const coPassword = req.body.password;
@@ -104,6 +105,7 @@ app.get('/coLogin', async (req, res) => {
         if (coPassword === storedPassword) {
           // Passwords match, user is authenticated
           authenticatedCo = true;
+          loggedCompanyIdentifier = await knex('Companies').where('CompEmail', coEmail).select('CompanyID').first();
           res.render('companyview1');
         } else {
           // Passwords do not match
@@ -237,9 +239,14 @@ app.get('/companyview1', (req, res) => {
 
 // route to company view 2 (work listed)
 app.get('/companyview2', (req, res) => {
-    if (authenticatedCo == true){
-        res.render('companyview2')
-    } else {res.redirect('companylogin')}
+    if (authenticatedCo == true) {
+        console.log(loggedCompanyIdentifier);
+        select('*').from('Jobs').where('CompanyId', loggedCompanyIdentifier).then(Jobs => {
+            console.log("I work", Jobs);
+            res.render("companyview1", { jobs: Jobs });
+    }) 
+    }else{
+        res.redirect('companylogin')}
 })
 
 app.listen(app.get("port"), () => {
