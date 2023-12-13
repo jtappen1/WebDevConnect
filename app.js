@@ -217,7 +217,7 @@ app.get('/studview', (req, res) => {
             .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
             .where('Jobs.Completed', false)
             .then(jobies => {
-                console.log(jobies);
+                console.log("these are your error thingy", jobies);
                 res.render('studview', { jobs: jobies });
             })
             .catch(error => {
