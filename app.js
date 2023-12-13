@@ -211,18 +211,27 @@ app.get('/companyreg', (req, res) => {
 
 //route to student view
 app.get('/studview', async (req, res) => {
-    if (authenticatedStud == true) {
-        jobs = await knex('Jobs')
-            .select('*')
-            .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
-            .where('Jobs.Completed', false)
+    if (authenticatedStud) {
+        try {
+            const jobs = await knex('Jobs')
+                .select('*')
+                .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
+                .where('Jobs.Completed', false);
 
-    console.log("here da jobs" + jobs);
-    res.render('studview', {jobs})
+            // Log relevant information, not the entire array
+            console.log("Here da jobs " + jobs);
+
+            res.render('studview', { jobs });
+        } catch (error) {
+            console.error("Error fetching jobs:", error);
+            // Handle the error appropriately, e.g., send an error response to the client
+            res.status(500).send("Internal Server Error");
+        }
     } else {
         res.redirect('studentlogin');
     }
 });
+
 
 
 // route to company view
