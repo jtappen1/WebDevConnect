@@ -212,13 +212,9 @@ app.get('/companyreg', (req, res) => {
 //route to student view
 app.get('/studview', async (req, res) => {
     if (authenticatedStud == true) {
-        jobs = await knex('Jobs')
-            .select('*')
-            .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
-            .where('Jobs.Completed', false)
-            .then(appjobs => {
-                console.log("these are your error thingy", appjobs);
-                res.render('studview', { jobs: appjobs });
+        knex.select('*').from('Jobs').innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
+        .where('Jobs.Completed', false).then(jobs => {
+            res.render("companyview1", { jobs: jobs });
             })
             .catch(error => {
                 console.error(error);
