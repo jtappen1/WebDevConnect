@@ -40,15 +40,15 @@
 
         <h1>Students that are available to build projects for your needs!</h1><br>
         <br>
-        <% for (let iCount = 0; iCount < students.length; iCount++) { %>
-            <fieldset><h2><%= students[iCount].StudLastName %>, <%= students[iCount].StudFirstName %></h2>
+        <% for (let iCount = 0; iCount < Students.length; iCount++) { %>
+            <fieldset><h2><%= Students[iCount].StudLastName %>, <%= Students[iCount].StudFirstName %></h2>
                 <ul>
-                    <li><p>School name:</p><%= students[iCount].StudSchool %></li>
-                    <li><p>Linkedin Profile:</p><%= students[iCount].Linkedin %></li>
-                    <li><p>Github Repository:</p><%= students[iCount].Github %></li>
-                    <li><p>Description of Skills:</p><%= students[iCount].StudDescription %></li>
-                    <li><p>Phone #:</p><%= students[iCount].StudPhone %></li>
-                    <li><p>Email:</p><%= students[iCount].StudEmail %></li>
+                    <li><p>School name:</p><%= Students[iCount].StudSchool %></li>
+                    <li><p>Linkedin Profile:</p><%= Students[iCount].Linkedin %></li>
+                    <li><p>Github Repository:</p><%= Students[iCount].Github %></li>
+                    <li><p>Description of Skills:</p><%= Students[iCount].StudDescription %></li>
+                    <li><p>Phone #:</p><%= Students[iCount].StudPhone %></li>
+                    <li><p>Email:</p><%= Students[iCount].StudEmail %></li>
                 </ul>
             </fieldset>
         <% } %>

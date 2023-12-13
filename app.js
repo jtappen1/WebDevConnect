@@ -230,7 +230,7 @@ app.get('/studview', (req, res) => {
 app.get('/companyview1', async (req, res) => {
     if (authenticatedCo == true) {
         await knex.select('*').from('Students').then(Student => {
-            res.render("companyview1", { students: Student });
+            res.render("companyview1", { Students: Student });
         });
     } else {
         res.redirect('companylogin');
