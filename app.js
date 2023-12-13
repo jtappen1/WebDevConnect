@@ -238,11 +238,11 @@ app.get('/companyview1', async (req, res) => {
 });
 
 // route to company view 2 (work listed)
-app.get('/companyview2', async(req, res) => {
+app.get('/companyview2', (req, res) => {
     if (authenticatedCo == true) {
-        await knex.select('*').from('Jobs').innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
-        .where('Jobs.CompanyID', loggedCompanyIdentifier).then(jobs => {
-            res.render("companyview2", { jobs: jobs });
+        knex.select('*').from('Jobs').innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
+        .where('Jobs.CompanyID', loggedCompanyIdentifier).then(Jobs => {
+            res.render("companyview2", { Jobs2: Jobs });
             })
             .catch(error => {
                 console.error(error);

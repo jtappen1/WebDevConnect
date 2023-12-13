@@ -43,12 +43,12 @@
         <button type="button" onclick="addJobForm()" class="button-23">Add a Listing</button>
         <br>
         <br>
-        <% for (let iCount = 0; iCount < jobs.length; iCount++) { %>
-            <fieldset id="compDisplay"><h2><%= jobs[iCount].JobName %></h2>
+        <% for (let iCount = 0; iCount < Jobs2.length; iCount++) { %>
+            <fieldset id="compDisplay"><h2><%= Jobs2[iCount].JobName %></h2>
                 <ul>
-                    <li><p>Job Description:</p><%= jobs[iCount].JobDescription %></li>
-                    <li><p>Deadline:</p><%= jobs[iCount].Deadline %></li>
-                    <li><p>Completed:</p><%= jobs[iCount].Completed %></li>
+                    <li><p>Job Description:</p><%= Jobs2[iCount].JobDescription %></li>
+                    <li><p>Deadline:</p><%= Jobs2[iCount].Deadline %></li>
+                    <li><p>Completed:</p><%= Jobs2[iCount].Completed %></li>
 
                 </ul>
             </fieldset>
