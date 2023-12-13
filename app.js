@@ -252,3 +252,29 @@ app.get('/companyview2', (req, res) => {
 app.listen(app.get("port"), () => {
     console.log(`Server started on port ${app.get("port")}`);
 });
+
+//for companies to add additional listings
+// company registration
+app.post('/postListing', async (req, res) => {
+    try {
+        const listData = {
+            JobName: req.body.JobName,
+            JobDescription: req.body.JobDescription,
+            Deadline: req.body.Deadline,
+            Completed: req.body.Completed,
+            CompanyID: req.body.CompanyID
+        };
+
+        // then she inserts the survey into the database
+        const insertedJob = await knex("Jobs").insert(listData).returning("*");
+
+        // Log the inserted survey data to make sure that it is right
+        console.log("DB updated successfully:", insertedJob);
+
+        res.redirect('companyview2')
+
+    } catch (error) {
+        console.error("Error submitting form:", error);
+        res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+  })
