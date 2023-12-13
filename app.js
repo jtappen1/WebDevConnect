@@ -216,9 +216,13 @@ app.get('/studview', async (req, res) => {
             .select('*')
             .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
             .where('Jobs.Completed', false)
-
-    console.log("here da jobs" + jobs);
-    res.render('studview', {jobs})
+            .then(appjobs => {
+                console.log("these are your error thingy", appjobs);
+                res.render('studview', { jobs: appjobs });
+            })
+            .catch(error => {
+                console.error(error);
+            });
     } else {
         res.redirect('studentlogin');
     }
