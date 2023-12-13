@@ -214,7 +214,7 @@ app.get('/studview', async (req, res) => {
     if (authenticatedStud == true) {
         await knex.select('*').from('Jobs').innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
         .where('Jobs.Completed', false).then(jobs => {
-            res.render("companyview1", { jobs: jobs });
+            res.render("studview", { jobs: jobs });
             })
             .catch(error => {
                 console.error(error);
