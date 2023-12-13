@@ -67,7 +67,7 @@ app.get('/studlogin', async (req, res) => {
         const user = await knex('Students').select('*').where('StudEmail', studEmail).first();
   
       // Check if a user with the provided email was found
-        if (user.StudEmail === studEmail) {
+        if (user) {
             const storedPassword = user.StudPassword;
   
         // Check if the provided password matches the stored password
