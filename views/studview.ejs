@@ -40,7 +40,7 @@
         <h1>Projects that are ready for you to get started!</h1><br>
         <br>
         <% for (let iCount = 0; iCount < jobs.length; iCount++) { %>
-            <fieldset><h2><%= jobs[iCount].JobName %></h2>
+            <fieldset id="compDisplay"><h2><%= jobs[iCount].JobName %></h2>
                 <ul>
                     <li><p>Company Name:</p><%= jobs[iCount].CompName %></li>
                     <li><p>Job Description:</p><%= jobs[iCount].JobDescription %></li>
