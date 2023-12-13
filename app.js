@@ -210,19 +210,15 @@ app.get('/companyreg', (req, res) => {
 })
 
 //route to student view
-app.get('/studview', (req, res) => {
+app.get('/studview', async (req, res) => {
     if (authenticatedStud == true) {
-        knex('Jobs')
+        jobs = await knex('Jobs')
             .select('*')
             .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
             .where('Jobs.Completed', false)
-            .then(jobies => {
-                console.log("these are your error thingy", jobies);
-                res.render('studview', { jobs: jobies });
-            })
-            .catch(error => {
-                console.error(error);
-            });
+
+    console.log("here da jobs" + jobs);
+    res.render('studview', {jobs})
     } else {
         res.redirect('studentlogin');
     }
