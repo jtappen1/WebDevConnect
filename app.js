@@ -229,6 +229,7 @@ app.get('/studview', async (req, res) => {
 });
 
 
+
 // route to company view
 app.get('/companyview1', (req, res) => {
     if (authenticatedCo == true) {
