@@ -210,7 +210,7 @@ app.get('/companyreg', (req, res) => {
 })
 
 //route to student view
-app.get('/studview', async (req, res) => {
+app.get('/studview', (req, res) => {
     if (authenticatedStud == true) {
         knex.select('*').from('Jobs').innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
         .where('Jobs.Completed', false).then(jobs => {
