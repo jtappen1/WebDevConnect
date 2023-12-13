@@ -233,7 +233,7 @@ app.get('/studview', async (req, res) => {
 // route to company view
 app.get('/companyview1', (req, res) => {
     if (authenticatedCo == true) {
-        select('*').from('Students').then(Student => {
+        knex.select('*').from('Students').then(Student => {
             res.render("companyview1", { students: Student });
         });
     } else {
@@ -245,7 +245,7 @@ app.get('/companyview1', (req, res) => {
 app.get('/companyview2', (req, res) => {
     if (authenticatedCo == true) {
         console.log(loggedCompanyIdentifier);
-        select('*').from('Jobs').where('CompanyId', loggedCompanyIdentifier).then(Jobs => {
+        knex.select('*').from('Jobs').where('CompanyId', loggedCompanyIdentifier).then(Jobs => {
             console.log("I work", Jobs);
             res.render("companyview1", { jobs: Jobs });
     }) 
