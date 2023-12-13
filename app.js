@@ -62,7 +62,7 @@ app.get('/studlogin', async (req, res) => {
   
     try {
       // Query the database for a user with the provided email
-        const user = await knex('Students').where('StudEmail', studEmail).select('*').first();
+        const user = await knex('Students').select('*').where('StudEmail', studEmail).first();
   
       // Check if a user with the provided email was found
         if (user.StudEmail === studEmail) {
@@ -90,22 +90,22 @@ app.get('/studlogin', async (req, res) => {
 //when login is attempted by company
 let loggedCompanyIdentifier;
 app.get('/coLogin', async (req, res) => {
-    const coEmail = req.body.email;
-    const coPassword = req.body.password;
+    var coEmail = req.body.email;
+    var coPassword = req.body.password;
   
     try {
       // Query the database for a user with the provided email
-      const company = await knex('Companies').where('CompEmail', coEmail).select('*').first();
+      var company = await knex('Companies').select('*').where('CompEmail', coEmail).first();
   
       // Check if a user with the provided email was found
-      if (company) {
-        const storedPassword = company.CompPassword;
+      if (company.CompEmail === coEmail) {
+        var storedPassword = company.CompPassword;
   
         // Check if the provided password matches the stored password
         if (coPassword === storedPassword) {
           // Passwords match, user is authenticated
           authenticatedCo = true;
-          loggedCompanyIdentifier = await knex('Companies').where('CompEmail', coEmail).select('CompanyID').first();
+          loggedCompanyIdentifier = await knex('Companies').select('CompanyID').where('CompEmail', coEmail).first();
           res.render('companyview1');
         } else {
           // Passwords do not match
