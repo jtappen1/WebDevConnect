@@ -227,9 +227,9 @@ app.get('/studview', (req, res) => {
 
 
 // route to company view
-app.get('/companyview1', (req, res) => {
+app.get('/companyview1', async (req, res) => {
     if (authenticatedCo == true) {
-        knex.select('*').from('Students').then(Student => {
+        await knex.select('*').from('Students').then(Student => {
             res.render("companyview1", { students: Student });
         });
     } else {
