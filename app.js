@@ -94,8 +94,8 @@ app.get('/studlogin', async (req, res) => {
 //when login is attempted by company
 let loggedCompanyIdentifier;
 app.get('/coLogin', async (req, res) => {
-    var coEmail = req.body.email;
-    var coPassword = req.body.password;
+    var coEmail = req.query.email;
+    var coPassword = req.query.password;
   
     try {
       // Query the database for a user with the provided email
