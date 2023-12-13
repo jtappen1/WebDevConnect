@@ -238,19 +238,25 @@ app.get('/companyview1', async (req, res) => {
 });
 
 // route to company view 2 (work listed)
-app.get('/companyview2', (req, res) => {
-    if (authenticatedCo == true) {
-        knex.select('*').from('Jobs').innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
-        .where('Jobs.CompanyID', loggedCompanyIdentifier).then(Jobs => {
+app.get('/companyview2', async (req, res) => {
+    try {
+        if (authenticatedCo) {
+            const Jobs = await knex
+                .select('Jobs.JobName', 'Jobs.JobDescription', 'Jobs.Deadline', 'Jobs.Completed')
+                .from('Jobs')
+                .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
+                .where('Jobs.CompanyID', loggedCompanyIdentifier);
+
             res.render("companyview2", { Jobs2: Jobs });
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    } else {
-        res.redirect('studentlogin');
+        } else {
+            res.redirect('companylogin');
+        }
+    } catch (error) {
+        console.error("Error fetching jobs:", error);
+        res.status(500).send('Internal Server Error');
     }
 });
+
 
 app.listen(app.get("port"), () => {
     console.log(`Server started on port ${app.get("port")}`);
