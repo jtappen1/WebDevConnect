@@ -234,7 +234,6 @@ app.get('/studview', async (req, res) => {
 app.get('/companyview1', (req, res) => {
     if (authenticatedCo == true) {
         select('*').from('Students').then(Student => {
-            console.log("I work", Student);
             res.render("companyview1", { students: Student });
         });
     } else {
