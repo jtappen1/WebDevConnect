@@ -62,12 +62,11 @@ app.get('/studlogin', async (req, res) => {
   
     try {
       // Query the database for a user with the provided email
-      // Query the database for a user with the provided email
-        const user = await knex('Students').where('email', studEmail).select('*').first();
+        const user = await knex('Students').where('StudEmail', studEmail).select('*').first();
   
       // Check if a user with the provided email was found
         if (user) {
-            const storedPassword = user.Password;
+            const storedPassword = user.StudPassword;
   
         // Check if the provided password matches the stored password
         if (studPassword === storedPassword) {
@@ -95,11 +94,11 @@ app.get('/coLogin', async (req, res) => {
   
     try {
       // Query the database for a user with the provided email
-      const company = await knex('Companies').where('email', coEmail).select('*').first();
+      const company = await knex('Companies').where('CompEmail', coEmail).select('*').first();
   
       // Check if a user with the provided email was found
       if (company) {
-        const storedPassword = company.Password;
+        const storedPassword = company.CompPassword;
   
         // Check if the provided password matches the stored password
         if (coPassword === storedPassword) {
