@@ -110,7 +110,7 @@ app.get('/coLogin', async (req, res) => {
           // Passwords match, user is authenticated
           authenticatedCo = true;
           loggedCompanyIdentifier = await knex('Companies').select('CompanyID').where('CompEmail', coEmail).first();
-          res.render('companyview1');
+          res.redirect('companyview1');
         } else {
           // Passwords do not match
           res.status(401).send('Unauthorized');
