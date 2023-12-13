@@ -103,7 +103,7 @@ app.get('/coLogin', async (req, res) => {
   
       // Check if a user with the provided email was found
       if (company) {
-        var storedPassword = company.CompPassword;
+        var storedPassword = company.Password;
   
         // Check if the provided password matches the stored password
         if (coPassword === storedPassword) {
