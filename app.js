@@ -102,8 +102,8 @@ app.get('/coLogin', async (req, res) => {
       var company = await knex('Companies').select('*').where('CompEmail', coEmail).first();
   
       // Check if a user with the provided email was found
-      if (company.CompEmail === coEmail) {
-        var storedPassword = company.CompPassword;
+      if (company) {
+        var storedPassword = company.Password;
   
         // Check if the provided password matches the stored password
         if (coPassword === storedPassword) {
