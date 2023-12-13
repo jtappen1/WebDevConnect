@@ -282,3 +282,9 @@ app.post('/postListing', async (req, res) => {
         res.status(500).json({ success: false, message: "Internal Server Error" });
     }
   })
+
+  app.get('/logout', (req, res) => {
+    authenticatedCo = false;
+    authenticatedStud = false;
+    res.redirect('/');
+  });
