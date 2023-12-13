@@ -59,8 +59,8 @@ app.get('/companylogin', (req, res) => {
 
 //when login is attempted by user
 app.get('/studlogin', async (req, res) => {
-    const studEmail = req.body.email;
-    const studPassword = req.body.password;
+    const studEmail = req.query.email;
+    const studPassword = req.query.password;
   
     try {
       // Query the database for a user with the provided email
