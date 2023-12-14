@@ -46,15 +46,15 @@
                 <h1 style="text-align:center;">Edit Listing</h1>
                 <form action="/editJob" method="POST">
                     <label for="JobName" style="text-align:left;">Job Name:</label>
-                    <input type="text" id="JobName" name="JobName" value="<%= Jobs[0].JobName" autofocus>
+                    <input type="text" id="JobName" name="JobName" value="<%= Jobs[0].JobName %>" autofocus>
                     <br>
                     <br>
                     <label for="JobDescription" style="text-align:left;">Job Desctiption:</label>
-                    <textarea id="JobDescription" name="JobDescription" value="<%= Jobs[0].JobDescription"></textarea>
+                    <textarea id="JobDescription" name="JobDescription" value="<%= Jobs[0].JobDescription %>"></textarea>
                     <br>
                     <br>
                     <label for="Deadline">Deadline: </label>
-                    <input type="date" id="Deadline" name="Deadline" value="<%= Jobs[0].Deadline">
+                    <input type="date" id="Deadline" name="Deadline" value="<%= Jobs[0].Deadline %>">
                     <br>
                     <br>
                     <label for="Completed">Project Status:</label>
