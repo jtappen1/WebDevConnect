@@ -243,7 +243,7 @@ app.get('/companyview2', async (req, res) => {
         if (authenticatedCo) {
             console.log('here is the comp id', loggedCompanyIdentifier);
             const Jobs = await knex
-                .select('Jobs.JobName', 'Jobs.JobDescription', 'Jobs.Deadline', 'Jobs.Completed')
+                .select('Jobs.JobName', 'Jobs.JobDescription', 'Jobs.Deadline', 'Jobs.Completed', 'JobID')
                 .from('Jobs')
                 .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
                 .where('Jobs.CompanyID', loggedCompanyIdentifier['CompanyID']);
