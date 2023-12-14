@@ -246,7 +246,7 @@ app.get('/companyview2', async (req, res) => {
                 .select('Jobs.JobName', 'Jobs.JobDescription', 'Jobs.Deadline', 'Jobs.Completed')
                 .from('Jobs')
                 .innerJoin('Companies', 'Jobs.CompanyID', 'Companies.CompanyID')
-                .where('Jobs.CompanyID', loggedCompanyIdentifier);
+                .where('Jobs.CompanyID', loggedCompanyIdentifier['CompanyID']);
 
             res.render("companyview2", { Jobs2: Jobs });
         } else {
