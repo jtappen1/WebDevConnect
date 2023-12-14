@@ -473,6 +473,50 @@ iframe {
   border: 0;
 }
 
+#compDisplay {
+  border: 2px solid #333;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#compDisplay h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#compDisplay ul {
+  list-style: none;
+  padding: 0;
+}
+
+#compDisplay li {
+  margin-bottom: 10px;
+}
+
+#compDisplay li p {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Optional: Style the content within the list items */
+#compDisplay li {
+  display: flex;
+  align-items: center;
+}
+
+#compDisplay li p {
+  flex: 1;
+  margin-right: 10px;
+}
+
+#compDisplay li span {
+  flex: 2;
+  color: #555;
+}
+
+
 summary {
   display: list-item;
   cursor: pointer;
