@@ -241,6 +241,7 @@ app.get('/companyview1', async (req, res) => {
 app.get('/companyview2', async (req, res) => {
     try {
         if (authenticatedCo) {
+            console.log('here is the comp id', loggedCompanyIdentifier);
             const Jobs = await knex
                 .select('Jobs.JobName', 'Jobs.JobDescription', 'Jobs.Deadline', 'Jobs.Completed')
                 .from('Jobs')
