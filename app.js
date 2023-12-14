@@ -272,7 +272,7 @@ app.post('/postListing', async (req, res) => {
             JobDescription: req.body.JobDescription,
             Deadline: req.body.Deadline,
             Completed: req.body.Completed,
-            CompanyID: req.body.CompanyID
+            CompanyID: loggedCompanyIdentifier['CompanyID']
         };
 
         // then she inserts the survey into the database
@@ -292,5 +292,6 @@ app.post('/postListing', async (req, res) => {
   app.get('/logout', (req, res) => {
     authenticatedCo = false;
     authenticatedStud = false;
+    loggedCompanyIdentifier = null;
     res.redirect('/');
   });
