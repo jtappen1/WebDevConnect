@@ -38,48 +38,30 @@
             </div>
         </section>
 
-        <h1>Projects listings from your company!</h1><br>
-        <br>
-        <button type="button" onclick="addJobForm(); scrollToElement('loginContent');" class="button-23">Add a Listing</button>        <br>
-        <br>
-        <% for (let iCount = 0; iCount < Jobs2.length; iCount++) { %>
-            <fieldset id="compDisplay"><h2><%= Jobs2[iCount].JobName %></h2>
-                <ul>
-                    <li><p>Job Description:</p><%= Jobs2[iCount].JobDescription %></li>
-                    <li><p>Deadline:</p><%= Jobs2[iCount].Deadline %></li>
-                    <li><p>Completed:</p><%= Jobs2[iCount].Completed %></li>
-                    <li><p>JobID:</p><%= Jobs2[iCount].JobID %></li>
-
-                </ul>
-                <form action="/deleteJob" method="POST">
-                    <input type="hidden" name="JobID" value="<%= Jobs2[iCount].JobID %>">
-                    <button type="submit" class="button-23">Delete</button>
-                </form>
-                <form action="/editJob" method="GET">
-                    <input type="hidden" name="JobID" value="<%= Jobs2[iCount].JobID %>">
-                    <button type="submit" class="button-23">Edit</button>
-                </form>
-            </fieldset>
-        <% } %>
+        <h1>Edit Listing:</h1><br>
         <br>
         <br>
-        <div id="loginContent" style="margin-top:10%; text-align:center; display:none;">
+        <div id="loginContent" style="margin-top:10%; text-align:center;">
             <div>
-                <h1 style="text-align:center;">Post a Listing</h1>
-                <form action="/postListing" method="POST">
+                <h1 style="text-align:center;">Edit Listing</h1>
+                <form action="/editJob" method="POST">
                     <label for="JobName" style="text-align:left;">Job Name:</label>
-                    <input type="text" id="JobName" name="JobName" autofocus>
+                    <input type="text" id="JobName" name="JobName" value="<%= Jobs[0].JobName" autofocus>
                     <br>
                     <br>
                     <label for="JobDescription" style="text-align:left;">Job Desctiption:</label>
-                    <textarea id="JobDescription" name="JobDescription"></textarea>
+                    <textarea id="JobDescription" name="JobDescription" value="<%= Jobs[0].JobDescription"></textarea>
                     <br>
                     <br>
                     <label for="Deadline">Deadline: </label>
-                    <input type="date" id="Deadline" name="Deadline">
+                    <input type="date" id="Deadline" name="Deadline" value="<%= Jobs[0].Deadline">
                     <br>
                     <br>
-                    <input type="hidden" id="Completed" name="Completed" value="false">
+                    <label for="Completed">Project Status:</label>
+                    <select id="Completed" name="Completed" value="<%= Jobs[0].Completed">
+                        <option value="true">Completed</option>
+                        <option value="false">Not Completed</option>
+                    </select>
                     <br>
                     <br>
                     <div id="button">
@@ -120,16 +102,6 @@
         <script src="/js/scripts.js"></script>
     </body>
     <script>
-    function scrollToElement(elementId) {
-        const element = document.getElementById(elementId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-    
-    function addJobForm(){
-        document.getElementById("loginContent").style.display = "block"; // Change from hidden to style.display
-    }
 
 
     window.addEventListener('DOMContentLoaded', event => {

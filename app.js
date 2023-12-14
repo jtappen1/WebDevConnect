@@ -306,3 +306,25 @@ app.post('/deleteJob', (req, res) => {
         res.status(500).send('Internal Server Error');
     });
 });
+
+
+app.get('/editJob', (req, res) => {
+    knex.select('JobID', 'JobName', 'JobDescription', 'Deadline', 'Completed').from('Jobs').where('Jobs.CompanyID', loggedCompanyIdentifier['CompanyID'])
+    .then(Jobs => {
+        res.render('editJobs', {Jobs: Jobs});
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({err});
+    });
+});
+
+app.post('/editJob', (req, res) => {
+    knex('Jobs').where("JobID", req.body.JobID).update({
+        JobName: req.body.JobName,
+        JobDescription: req.body.JobDescription,
+        Deadline: req.body.Deadline,
+        Completed: req.body.Completed
+    }).then(Jobs => {
+        res.redirect('companyview1');
+    })
+})
