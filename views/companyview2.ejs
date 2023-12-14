@@ -40,8 +40,7 @@
 
         <h1>Projects listings from your company!</h1><br>
         <br>
-        <button type="button" onclick="addJobForm()" href="#loginContent" class="button-23">Add a Listing</button>
-        <br>
+        <button type="button" onclick="addJobForm(); scrollToElement('loginContent');" class="button-23">Add a Listing</button>        <br>
         <br>
         <% for (let iCount = 0; iCount < Jobs2.length; iCount++) { %>
             <fieldset id="compDisplay"><h2><%= Jobs2[iCount].JobName %></h2>
@@ -112,6 +111,13 @@
         <script src="/js/scripts.js"></script>
     </body>
     <script>
+    function scrollToElement(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+    
     function addJobForm(){
         document.getElementById("loginContent").style.display = "block"; // Change from hidden to style.display
     }
