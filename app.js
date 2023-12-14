@@ -309,7 +309,7 @@ app.post('/deleteJob', (req, res) => {
 
 
 app.get('/editJob', (req, res) => {
-    knex.select('JobID', 'JobName', 'JobDescription', 'Deadline', 'Completed').from('Jobs').where('Jobs.CompanyID', loggedCompanyIdentifier['CompanyID'])
+    knex.select('JobID', 'JobName', 'JobDescription', 'Deadline', 'Completed').from('Jobs').where('JobID', req.body.JobID)
     .then(Jobs => {
         res.render('editJobs', {Jobs: Jobs});
     }).catch(err => {
