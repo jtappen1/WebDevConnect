@@ -49,7 +49,7 @@
                     <li><p>Deadline:</p><%= Jobs2[iCount].Deadline %></li>
                     <li><p>Completed:</p><%= Jobs2[iCount].Completed %></li>
                 </ul>
-                <form action="/deleteJob/ <%=Jobs2[iCount].JobID %>" method="POST">
+                <form action="/deleteJob/<%=Jobs2[iCount].JobID %>" method="POST">
                     <button type="submit" class="button-23">Delete</button>
                 </form>
             </fieldset>
