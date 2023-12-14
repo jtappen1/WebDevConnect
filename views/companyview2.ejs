@@ -48,6 +48,8 @@
                     <li><p>Job Description:</p><%= Jobs2[iCount].JobDescription %></li>
                     <li><p>Deadline:</p><%= Jobs2[iCount].Deadline %></li>
                     <li><p>Completed:</p><%= Jobs2[iCount].Completed %></li>
+                    <li><p>JobID:</p><%= Jobs2[iCount].JobID %></li>
+
                 </ul>
                 <form action="/deleteJob" method="POST">
                     <input type="hidden" name="JobID" id="JobID" value="<%= Jobs2[iCount].JobID %>">
