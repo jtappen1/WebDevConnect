@@ -296,9 +296,9 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-app.post('/deleteJob/:id', (req, res) => {
+app.post('/deleteJob', (req, res) => {
     console.log('here is that deletion shnizzle bruv')
-    knex('Jobs').where('JobID', req.params.id).del().then(() => {
+    knex('Jobs').where('JobID', req.body.JobID).del().then(() => {
         res.redirect('/companyview2');
     }).catch(error => {
         console.error('Error deleting job:', error);
