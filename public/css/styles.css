@@ -10,6 +10,14 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+.survey-btn{
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #0dcaf0;
+}
+
+
+
 :root {
   --bs-blue: #1D809F;
   --bs-indigo: #6610f2;
